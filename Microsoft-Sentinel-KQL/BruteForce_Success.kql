@@ -1,0 +1,11 @@
+// Finds 10+ failed logins followed by 1 success from the same IP
+SigninLogs
+| summarize 
+    Failures = countif(ResultType != 0), 
+    Successes = countif(ResultType == 0), 
+    FirstFailure = min(TimeGenerated), 
+    LastSuccess = max(TimeGenerated) 
+    by IPAddress, UserPrincipalName
+| where Failures >= 10 and Successes > 0
+| where LastSuccess > FirstFailure
+| project UserPrincipalName, IPAddress, Failures, Successes, FirstFailure, LastSuccess
