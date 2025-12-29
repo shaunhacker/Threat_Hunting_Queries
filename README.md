@@ -3,9 +3,11 @@
 A repository of production-ready SIEM queries (KQL, SPL, and SQL) designed to detect common adversary techniques mapped to the MITRE ATT&CK framework.
 
 ## 📂 Structure
-- **/Microsoft-Sentinel-KQL**: Queries for Azure/Microsoft 365 environments.
-- **/Splunk-SPL**: Queries for Splunk Enterprise/Cloud.
-- **/Elastic-Query**: Queries for ELK Stack (DSL/KQL).
+Threat-Hunting-Queries
+* **Microsoft-Sentinel-KQL**: Cloud-native hunting using Kusto Query Language.
+* **Splunk-SPL**: Search Processing Language for on-prem and cloud logs.
+* **Database-SQL**: Security auditing for SQL Server and relational databases.
+* **Elastic-Query**: KQL/DSL queries for the ELK Stack.
 
 ---
 
@@ -24,3 +26,8 @@ A repository of production-ready SIEM queries (KQL, SPL, and SQL) designed to de
 ### 3. Account Creation followed by Immediate Deletion
 **Goal:** Detect "Shadow Admins" creating backdoors and cleaning up logs.
 - **MITRE:** [T1136 (Create Account)](https://attack.mitre.org/techniques/T1136/)
+
+- ### 4. Database Security (SQL)
+**Goal:** Monitor for "Sinister SQL" activities like unauthorized configuration changes or privilege escalation within the database itself.
+- **MITRE:** [T1078 (Valid Accounts)](https://attack.mitre.org/techniques/T1078/)
+- **Logic:** Audits system tables to find active sessions for accounts that should be disabled or the use of dangerous stored procedures (like `xp_cmdshell`).
