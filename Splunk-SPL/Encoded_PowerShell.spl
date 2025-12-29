@@ -1,0 +1,4 @@
+# Detects PowerShell running with base64 encoded commands to hide activity.
+index=windows_logs (process_name="powershell.exe" OR process_name="pwsh.exe")
+| search CommandLine="*-enc*" OR CommandLine="*-EncodedCommand*" OR CommandLine="*-e *"
+| table _time, host, user, CommandLine
